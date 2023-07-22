@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setIsMobile } from "./state/slices/isMobileSlice";
+import { fetchNowPlaying, fetchTopRated } from "./state/thunks/moviesThunk";
 import { Routes, Route } from "react-router";
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
 
   useEffect(() => {
     dispatch(setIsMobile(window.matchMedia("(max-width: 600px)").matches));
+    dispatch(fetchNowPlaying())
+    dispatch(fetchTopRated())
   }, []);
 
   return (

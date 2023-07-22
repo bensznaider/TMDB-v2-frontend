@@ -1,80 +1,135 @@
-@media (max-width: 600px) {
-  body {
-    margin: 0;
-    background-color: #b6c2d9;
-    color: #272932;
-    font-family: 'Oswald', sans-serif;
-  }
-  #logo {
-    padding: 0 1rem;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 0 1.5rem 0;
-    border-color: #b6c2d9;
-    cursor: pointer;
-  }
-  .navbar {
-    background: linear-gradient(#272932, #353844);
-    color: #b6c2d9;
-    position: fixed;
-    top: 0;
-    z-index: 1;
-    width: 84%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 8%;
-    padding-right: 8%;
-  }
-  .navbar-menu {
-    background: linear-gradient(#353844, #272932);
-    top: 1;
-    margin-top: 5rem;
-    flex-direction: column;
-  
-  }
-  .buttons {
-    background-color: #828489;
-    color: #272932;
-    width: 10rem;
-    padding: 1rem;
-    border-radius: 0 1.5rem 0;
-    font-family: 'Oswald', sans-serif;
-    font-size: large;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    transition: color 0.5s;
-  }
-  .buttons:hover {
-    color: white;
-  }
-  .footer {
-    background: linear-gradient(#272932, #353844);
-    color: #b6c2d9;
-    padding: 0.5rem;
-  }
-  .welcome-posters-container {
-    position: relative;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-  .welcome-static-text {
-    position: absolute;
-    padding: 3.5rem 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-  .welcome-posters-marquee {
-    opacity: 0.6;
-    filter: grayscale(80%);
-  }
+/* @media (max-width: 600px) {
+} */
+
+body {
+  margin: 0;
+  background-color: #b6c2d9;
+  color: #272932;
+  font-family: "Oswald", sans-serif;
 }
-
-
-
+#logo {
+  padding: 0 1rem;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0 1.5rem 0;
+  border-color: #b6c2d9;
+  cursor: pointer;
+}
+.navbar {
+  background: linear-gradient(#272932, #353844);
+  color: #b6c2d9;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 84%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 8%;
+  padding-right: 8%;
+}
+.navbar-menu {
+  background: linear-gradient(#353844, #272932);
+  top: 1;
+  margin-top: 5rem;
+  flex-direction: column;
+}
+.buttons {
+  background-color: #828489;
+  color: #272932;
+  width: 10rem;
+  padding: 1rem;
+  border-radius: 0 1.5rem 0;
+  font-family: "Oswald", sans-serif;
+  font-size: large;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: color 0.5s;
+}
+.buttons:hover {
+  color: white;
+}
+.signup-home {
+  background: linear-gradient(#272932, #353844);
+  color: #b6c2d9;
+  padding-top: 0.1rem;
+  padding-bottom: 1rem;
+}
+.footer {
+  background: linear-gradient(#272932, #353844);
+  color: #b6c2d9;
+  padding: 0.5rem;
+}
+.welcome-posters-container {
+  background-color: #272932;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.welcome-static-text {
+  position: absolute;
+  padding: 2.5rem 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-shadow: black 0 0 15px;
+  color: white;
+}
+.welcome-posters-marquee {
+  opacity: 0.6;
+  filter: grayscale(90%);
+}
+.welcome-search-container {
+  position: relative;
+}
+.welcome-search {
+  width: 20rem;
+  padding: 0.5rem;
+  border-radius: 0 1.5rem 0;
+  font-family: "Oswald", sans-serif;
+}
+.search-button {
+  position: absolute;
+  top: 11.2rem;
+  right: 2.5rem;
+  width: 4rem;
+  border-color: #828489;
+  border-radius: 0 1.5rem 0;
+  font-family: "Oswald", sans-serif;
+  background-color: #828489;
+  color: #272932;
+  cursor: pointer;
+  transition: color 0.5s;
+}
+.search-button:hover {
+  color: white;
+}
+.movie-card-background {
+  position: relative;
+  width: max-content;
+  height: 20rem;
+  padding: 1rem;
+  border-color: red;
+  border-radius: 0 3rem 0;
+  opacity: 0.2;
+  filter: grayscale(90%);
+  cursor: pointer;
+}
+.movie-card-content {
+  position: absolute;
+  top: 18.5rem;
+  left: 8.5rem;
+  color: white;
+  text-shadow: black 0 0 15px;
+  width: 8rem;
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 /* #root {
   max-width: 1280px;
   margin: 0 auto;

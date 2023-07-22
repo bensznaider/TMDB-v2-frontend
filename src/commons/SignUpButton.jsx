@@ -8,7 +8,7 @@ const SignUpButton = () => {
   };
 
   return (
-    <button className="buttons" onClick={handleSignUpClick}>
+    <button className="buttons signup-button" onClick={handleSignUpClick}>
       SIGN UP
     </button>
   );
