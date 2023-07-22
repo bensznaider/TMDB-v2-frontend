@@ -1,13 +1,10 @@
-import { useState } from "react";
 import PostersMarquee from "./PostersMarquee";
-import MovieCard from "../commons/MovieCard";
 import { useSelector } from "react-redux";
 
 const Welcome = () => {
   const nowPlaying = useSelector((state) => {
     return state.movies.nowPlaying;
   });
-  const [movie, setMovie] = useState(null);
 
   return (
     <div className="welcome-posters-container" style={{ marginTop: "5.5rem" }}>
@@ -28,7 +25,6 @@ const Welcome = () => {
         />
         <button className="welcome-search search-button">Search</button>
       </div>
-      {movie ? <MovieCard movie={movie} /> : <></>}
     </div>
   );
 };

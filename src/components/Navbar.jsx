@@ -5,10 +5,15 @@ import { Spin as Hamburger } from "hamburger-react";
 import NavbarMenuDesktop from "./Desktop/NavbarMenu";
 import LoginButton from "../commons/LoginButton";
 
-const Navbar = () => {
+const Navbar = ({ toggleMenu }) => {
   const isMobileDevice = useSelector((state) => state.isMobile);
   const [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
+
+  const handleMenuClick = () => {
+    setOpen(!isOpen)
+    toggleMenu()
+  }
 
   const handleLogoClick = () => {
     navigate("/");
@@ -26,7 +31,7 @@ const Navbar = () => {
           TMDB
         </h1>
         {isMobileDevice ? (
-          <Hamburger toggled={isOpen} toggle={setOpen} />
+          <Hamburger toggled={isOpen} toggle={handleMenuClick} />
         ) : (
           <NavbarMenuDesktop />
         )}

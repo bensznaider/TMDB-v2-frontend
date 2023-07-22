@@ -106,30 +106,41 @@ body {
 .search-button:hover {
   color: white;
 }
+.movie-card-container {
+  position: relative;
+}
 .movie-card-background {
   position: relative;
   width: max-content;
-  height: 20rem;
+  height: 13rem;
   padding: 1rem;
   border-color: red;
   border-radius: 0 3rem 0;
-  opacity: 0.2;
-  filter: grayscale(90%);
+  opacity: 0.3;
   cursor: pointer;
 }
-.movie-card-content {
-  position: absolute;
-  top: 18.5rem;
-  left: 8.5rem;
-  color: white;
-  text-shadow: black 0 0 15px;
-  width: 8rem;
-  padding: 1rem;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+
+/* OJO QUE EN VERSIÓN DESKTOP LA POSITION ABSOLUTE NO VA A SERVIR PARA LA MOVIE CARD */
+@media (max-width: 600px) {
+  .blur {
+    filter: blur(5px); 
+    pointer-events: none;
+  }
+  .movie-card-content {
+    position: absolute;
+    top: 4rem;
+    left: 1.8rem;
+    color: white;
+    text-shadow: black 0 0 15px;
+    width: 8rem;
+    padding: 1rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }  
 }
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;

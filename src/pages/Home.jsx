@@ -3,10 +3,10 @@ import Welcome from "../components/Welcome";
 import TopRated from "../components/TopRated"
 import NowPlaying from "../components/NowPlaying";
 
-const Home = () => {
+const Home = ({ isMenuOpen }) => {
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div className={`${isMenuOpen ? 'blur' : ''}`} style={{ textAlign: "center" }}>
       <Welcome />
       <SignUp />
       <TopRated />
