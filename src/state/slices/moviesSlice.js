@@ -5,16 +5,12 @@ const moviesSlice = createSlice({
   initialState: {
     nowPlaying: [],
     topRated: [],
-    selected: {},
   },
   reducers: {
     setNowPlaying: (state, action) => {
       state.nowPlaying = action.payload;
     },
     setTopRated: (state, action) => {
-      state.topRated = action.payload;
-    },
-    setSelected: (state, action) => {
       state.topRated = action.payload;
     },
   },

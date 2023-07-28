@@ -10,7 +10,7 @@ export const fetchNowPlaying = () => async (dispatch) => {
     );
     dispatch(setNowPlaying(response.data.results));
   } catch (err) {
-    console.error("Fetch categories error: ", err);
+    console.error("Fetch Now Playing list error: ", err);
   }
 };
 
@@ -21,17 +21,17 @@ export const fetchTopRated = () => async (dispatch) => {
     );
     dispatch(setTopRated(response.data.results));
   } catch (err) {
-    console.error("Fetch categories error: ", err);
+    console.error("Fetch Top Rated list error: ", err);
   }
 };
 
-/* export const fetchMovieById = () => async (dispatch) => {
+export const fetchMovieDetails = (id) => async () => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_SERVER}/movies/top-rated`
+      `${import.meta.env.VITE_SERVER}/movies/details/${id}`
     );
-    dispatch(setTopRated(response.data.results));
+    return response.data;
   } catch (err) {
-    console.error("Fetch categories error: ", err);
+    console.error("Fetch Movie Details By ID error: ", err);
   }
-}; */
+};
