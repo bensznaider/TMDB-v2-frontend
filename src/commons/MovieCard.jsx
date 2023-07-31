@@ -3,10 +3,14 @@ import { useNavigate } from "react-router";
 const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
 
+  const handleMovieSelector = () => {
+    navigate(`/movie/${movie.id}`);
+  };
+
   return (
     <>
       {movie ? (
-        <div className="movie-card-container">
+        <div className="movie-card-container" onClick={handleMovieSelector}>
           <img
             className="movie-card-background"
             src={`https://image.tmdb.org/t/p/w185${movie.poster_path}`}
