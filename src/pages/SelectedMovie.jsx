@@ -27,14 +27,6 @@ const SelectedMovie = ({ isMenuOpen }) => {
 
   }
 
-  const Loading = () => {
-    let word = "Loading"
-    setInterval(()=>{
-      word+="."
-    }, 1000)
-    return word
-  }
-
   return (
     <>
       {!movie ? (

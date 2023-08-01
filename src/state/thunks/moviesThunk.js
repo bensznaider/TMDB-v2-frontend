@@ -1,7 +1,18 @@
 import axios from "axios";
-import { setNowPlaying, setTopRated } from "../slices/moviesSlice";
+import { setNowPlaying, setTopRated, setSearchResults } from "../slices/moviesSlice";
 
 axios.defaults.withCredentials = true;
+
+export const fetchMoviesByString = (movieString) => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_SERVER}/movies/search?movie=${movieString}`
+    );
+    dispatch(setSearchResults(response.data.results));
+  } catch (err) {
+    console.error("Fetch Movies By String error: ", err);
+  }
+};
 
 export const fetchNowPlaying = () => async (dispatch) => {
   try {
