@@ -1,15 +1,13 @@
-import { useNavigate } from "react-router";
+import { IoIosArrowDown } from "react-icons/io";
 
-const LoginButton = () => {
-  const navigate = useNavigate();
-
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
-
+const LoginButton = ({ loginMenuDisplayed }) => {
   return (
-    <button className="buttons" onClick={handleLoginClick}>
+    <button
+      className={`${!loginMenuDisplayed ? 'buttons signup-home' : 'buttons'}`}
+      style={{ borderColor: "white", paddingTop: "1rem" }}
+    >
       LOGIN
+      {!loginMenuDisplayed ? <IoIosArrowDown style={{ marginLeft: "5px" }} /> : <></>}
     </button>
   );
 };

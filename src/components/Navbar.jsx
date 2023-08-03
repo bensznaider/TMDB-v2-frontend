@@ -8,21 +8,36 @@ import LoginButton from "../commons/LoginButton";
 const Navbar = ({ toggleMenu }) => {
   const isMobileDevice = useSelector((state) => state.isMobile);
   const [isOpen, setOpen] = useState(false);
+  const [loginForm, setLoginForm] = useState(false);
   const navigate = useNavigate();
 
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleOnChangeUser = (event) => {
+    event.preventDefault();
+    setUserName(event.target.value);
+  };
+
+  const handleOnChangeEmail = (event) => {
+    event.preventDefault();
+    setEmail(event.target.value);
+  };
+
   const handleMenuClick = () => {
-    setOpen(!isOpen)
-    toggleMenu()
-  }
+    setOpen(!isOpen);
+    toggleMenu();
+  };
 
   const handleLogoClick = () => {
     navigate("/");
   };
 
-  const handleLoginClick = () => {
-    navigate("/login");
-    setOpen(false);
+  const handleLoginForm = () => {
+    setLoginForm(true);
   };
+
+  const handleLoginRequest = () => {};
 
   return (
     <>
@@ -36,7 +51,7 @@ const Navbar = ({ toggleMenu }) => {
           <NavbarMenuDesktop />
         )}
       </div>
-      {isMobileDevice && isOpen ? (
+      {isMobileDevice && isOpen && !loginForm ? (
         <span className="navbar navbar-menu">
           <span
             style={{
@@ -48,9 +63,42 @@ const Navbar = ({ toggleMenu }) => {
           >
             Guest
           </span>
-          <span onClick={handleLoginClick}>
-            <LoginButton />
+          <span onClick={handleLoginForm}>
+            <LoginButton loginMenuDisplayed={false} />
           </span>
+        </span>
+      ) : (
+        <></>
+      )}
+      {isMobileDevice && isOpen && loginForm ? (
+        <span className="navbar navbar-menu" style={{ textAlign: "center" }}>
+          <span
+            style={{
+              padding: "1rem",
+              marginBottom: "0.2rem",
+              fontSize: "large",
+            }}
+          >
+            Guest
+          </span>
+          <form onSubmit={handleLoginRequest}>
+            <input
+              className="welcome-search"
+              type="text"
+              value={userName}
+              onChange={handleOnChangeUser}
+              placeholder="USERNAME"
+            />
+            <input
+              className="welcome-search"
+              type="text"
+              value={email}
+              onChange={handleOnChangeEmail}
+              placeholder="EMAIL: example@example.com"
+              style={{ margin: "1.5rem" }}
+            />
+            <LoginButton loginMenuDisplayed={true} />
+          </form>
         </span>
       ) : (
         <></>
