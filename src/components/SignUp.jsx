@@ -7,17 +7,11 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const [signUpForm, setSignUpForm] = useState(false);
 
-  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [correctSignUp, setCorrectSignUp] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-
-  const handleOnChangeUser = (event) => {
-    event.preventDefault();
-    setUserName(event.target.value);
-  };
 
   const handleOnChangeEmail = (event) => {
     event.preventDefault();
@@ -37,7 +31,7 @@ const SignUp = () => {
     event.preventDefault();
     setErrorMessage(null);
     setCorrectSignUp(null);
-    const user = { username: userName, email: email, password: password };
+    const user = { email: email, password: password };
     try {
       const response = await dispatch(createUser(user));
       if (response.status === 200) {
@@ -46,12 +40,11 @@ const SignUp = () => {
           behavior: "smooth",
           block: "center",
         });
-        setUserName("");
         setEmail("");
         setPassword("");
       }
     } catch (error) {
-      console.error("Error during sign up: ", error);
+      console.error("Error during signup: ", error);
       setErrorMessage(error.response.data);
       document.getElementById("result-message").scrollIntoView({
         behavior: "smooth",
@@ -71,18 +64,11 @@ const SignUp = () => {
         <form onSubmit={handleSignUpRequest}>
           <input
             className="welcome-search"
-            type="text"
-            value={userName}
-            onChange={handleOnChangeUser}
-            placeholder="USERNAME"
-          />
-          <input
-            className="welcome-search"
-            type="text"
+            type="email"
             value={email}
             onChange={handleOnChangeEmail}
             placeholder="EMAIL: example@example.com"
-            style={{ margin: "1.5rem" }}
+            style={{ marginBottom: "1.5rem" }}
           />
           <input
             className="welcome-search"
@@ -92,7 +78,6 @@ const SignUp = () => {
             placeholder="PASSWORD"
             style={{ marginBottom: "1.5rem" }}
           />
-
           <SignUpButton signUpMenuDisplayed={true} />
         </form>
       )}
@@ -105,10 +90,7 @@ const SignUp = () => {
           <></>
         )}
         {errorMessage ? (
-          <div
-            //ref={errorMessageRef} // Attach the ref to the error message element
-            style={{ margin: "1rem", fontSize: "large" }}
-          >
+          <div style={{ margin: "1rem", fontSize: "large" }}>
             {errorMessage}
           </div>
         ) : (

@@ -6,8 +6,10 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setIsMobile } from "./state/slices/isMobileSlice";
 import { fetchNowPlaying, fetchTopRated } from "./state/thunks/moviesThunk";
+import { reloadUser } from "./state/thunks/usersThunk";
 import { Routes, Route } from "react-router";
 import SelectedMovie from "./pages/SelectedMovie";
+import { setLoggedUser } from "./state/slices/userSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +18,19 @@ function App() {
     dispatch(setIsMobile(window.matchMedia("(max-width: 600px)").matches));
     dispatch(fetchNowPlaying());
     dispatch(fetchTopRated());
+  }, []);
+
+  useEffect(() => {
+    const userPersistence = async () => {
+      try {
+        const response = await dispatch(reloadUser())
+        dispatch(setLoggedUser({userId: response.data.id, email: response.data.email}))
+      }
+      catch (error) {
+        console.log(error)
+      }
+    }
+    userPersistence()
   }, []);
 
   const [isMenuOpen, setMenuOpen] = useState(false);
