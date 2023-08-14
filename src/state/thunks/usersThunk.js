@@ -15,7 +15,7 @@ export const createUser = (user) => async () => {
   }
 };
 
-export const loginUser = (user) => async () => {
+export const login = (user) => async () => {
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_SERVER}/users/login`,
@@ -36,8 +36,18 @@ export const reloadUser = () => async () => {
       `${import.meta.env.VITE_SERVER}/users/me`,
       token
     );
-    console.log(response)
     return response
+  }
+  catch (err) {
+    throw err;
+  }
+}
+
+export const logout = (dispatch) => async () => {
+  try {
+    await dispatch(setLoggedUser({ userId: null, email: null }))
+    localStorage.removeItem("token");
+    return
   }
   catch (err) {
     throw err;

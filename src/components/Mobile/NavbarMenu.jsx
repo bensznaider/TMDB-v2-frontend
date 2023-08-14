@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoginButton from "../../commons/LoginButton";
 import LogoutButton from "../../commons/LogoutButton";
-import { loginUser } from "../../state/thunks/usersThunk";
+import { login, logout } from "../../state/thunks/usersThunk";
 import { setLoggedUser } from "../../state/slices/userSlice";
 
 const NavbarMenuMobile = ({ isOpen }) => {
@@ -31,25 +31,29 @@ const NavbarMenuMobile = ({ isOpen }) => {
     setLoginForm(true);
   };
 
-  const handleLogoutForm = () => {
-    console.log("LOGOUT LLEGÓ")
-  };
-
   const handleLoginRequest = async (event) => {
     event.preventDefault();
     const user = { email: email, password: password };
     try {
-      const response = await dispatch(loginUser(user));
-      dispatch(setLoggedUser({userId: response.data.userId, email: user.email}))
+      const response = await dispatch(login(user));
+      dispatch(
+        setLoggedUser({ userId: response.data.userId, email: user.email })
+      );
+      setLoginForm(false);
     } catch (error) {
       console.error("Error during login: ", error);
       setErrorMessage("Incorrect email or password");
     }
   };
 
+  const handleLogout = () => {
+    dispatch(logout(dispatch));
+    setLoginForm(false);
+  };
+
   return (
     <>
-      {isOpen && !loginForm && !loggedUser? (
+      {isOpen && !loginForm && !loggedUser.userId ? (
         <span className="navbar-menu">
           <span
             style={{
@@ -67,7 +71,7 @@ const NavbarMenuMobile = ({ isOpen }) => {
       ) : (
         <></>
       )}
-       {isOpen && !loginForm && loggedUser? (
+      {isOpen && !loginForm && loggedUser.userId ? (
         <span className="navbar-menu">
           <span
             style={{
@@ -78,14 +82,14 @@ const NavbarMenuMobile = ({ isOpen }) => {
           >
             {loggedUser.email}
           </span>
-          <span onClick={handleLogoutForm}>
+          <span onClick={handleLogout}>
             <LogoutButton />
           </span>
         </span>
       ) : (
         <></>
       )}
-      {isOpen && loginForm && !loggedUser? (
+      {isOpen && loginForm && !loggedUser.userId ? (
         <span className="navbar-menu" style={{ textAlign: "center" }}>
           <span
             style={{
