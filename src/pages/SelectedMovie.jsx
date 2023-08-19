@@ -1,20 +1,42 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchMovieDetails } from "../state/thunks/moviesThunk";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
+import {
+  getFavorites,
+  addFavorite,
+  removeFavorite,
+} from "../state/thunks/favoritesThunk";
 
 const SelectedMovie = ({ isMenuOpen }) => {
   const dispatch = useDispatch();
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [completeCast, setCompleteCast] = useState(false);
+  const loggedUser = useSelector((state) => state.loggedUser);
+  const [isFav, setIsFav] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  useEffect(() => {
+    const setFavFunction = async () => {
+      try {
+        if (loggedUser.userId) {
+          const favs = await dispatch(getFavorites(loggedUser.userId))
+          if (favs.data.find((fav) => fav.tmdbId === parseInt(movieId))) {
+            setIsFav(true)};
+        };
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    setFavFunction();
+  }, [dispatch, getFavorites, loggedUser, movieId, setIsFav]);
 
   useEffect(() => {
     const getMovieDetails = async () => {
       const movie = await dispatch(fetchMovieDetails(movieId));
       setMovie(movie);
-      console.log(movie);
     };
     getMovieDetails();
   }, [movieId, dispatch]);
@@ -24,8 +46,33 @@ const SelectedMovie = ({ isMenuOpen }) => {
   };
 
   const handleFavorite = () => {
-
-  }
+    if (!loggedUser.userId) {
+      setErrorMessage("Please log in to add favorites.");
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 3000);
+    } else if (isFav && loggedUser.userId) {
+      const movieData = {
+        title: movie.data.original_title,
+        tmdbId: movieId,
+        userId: loggedUser.userId,
+        year: movie.data.release_date.substring(0, 4),
+        posterURL: movie.data.poster_path,
+      };
+      dispatch(removeFavorite(movieData));
+      setIsFav(false);
+    } else if (!isFav && loggedUser.userId) {
+      const movieData = {
+        title: movie.data.original_title,
+        tmdbId: movieId,
+        userId: loggedUser.userId,
+        year: movie.data.release_date.substring(0, 4),
+        posterURL: movie.data.poster_path,
+      };
+      dispatch(addFavorite(movieData));
+      setIsFav(true);
+    }
+  };
 
   return (
     <>
@@ -58,8 +105,27 @@ const SelectedMovie = ({ isMenuOpen }) => {
             >
               {movie.data.original_title} (
               {movie.data.release_date.substring(0, 4)})
-              <span onClick={handleFavorite} style={{ cursor: "pointer" }}> <MdFavoriteBorder /></span>
+              <span onClick={handleFavorite} style={{ cursor: "pointer" }}>
+                {" "}
+                {isFav ? <MdFavorite /> : <MdFavoriteBorder />}
+              </span>
             </span>
+            {errorMessage ? (
+              <span
+                style={{
+                  background: "linear-gradient(#272932, #353844)",
+                  color: "#b6c2d9",
+                  borderRadius: "0 1.5rem 0",
+                  width: "60%",
+                  padding: "0.3rem 0",
+                  margin: "auto",
+                }}
+              >
+                {errorMessage}
+              </span>
+            ) : (
+              <></>
+            )}
             <span style={{ margin: "0.5rem" }}>{movie.data.overview}</span>
             <span style={{ margin: "0.5rem" }}>
               <div>Screenplay:</div>

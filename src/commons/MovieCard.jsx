@@ -18,7 +18,7 @@ const MovieCard = ({ movie }) => {
           <div className="movie-card-content">
             <span>{movie.original_title}</span>
             <span>({movie.release_date.substring(0, 4)})</span>
-            <span>Avg. rating: {movie.vote_average}/10</span>
+            {movie.vote_average ? (<span>Avg. rating: {movie.vote_average}/10</span>) : <></>}
           </div>
         </div>
       ) : (
