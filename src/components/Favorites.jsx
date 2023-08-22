@@ -44,6 +44,7 @@ const Favorites = () => {
         style={{
           height: "2px",
           margin: "auto",
+          marginBottom: favorites.length <= 0 ? "1rem" : "0",
           width: "30%",
           backgroundColor: "#b6c2d9",
         }}
@@ -72,7 +73,18 @@ const Favorites = () => {
             }}
           />
         ) : (
-          <span>LOADING...</span>
+          <span style={{
+            height: "12rem",
+            width: "8rem",
+            marginBottom: "1rem",
+            borderRadius: "0 3rem 0",
+            borderStyle: "solid",
+            borderWidth: "2px",
+            borderColor: "#b6c2d9",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+            }}>Select your favorite movies.</span>
         )}
         {activeIndex < favorites.length - 1 ? (
           <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
