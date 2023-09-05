@@ -16,8 +16,8 @@ function App() {
 
   useEffect(() => {
     dispatch(setIsMobile(window.matchMedia("(max-width: 600px)").matches));
-    dispatch(fetchNowPlaying());
-    dispatch(fetchTopRated());
+    dispatch(fetchNowPlaying(1));
+    dispatch(fetchTopRated(1));
   }, []);
 
   useEffect(() => {

@@ -14,10 +14,10 @@ export const fetchMoviesByString = (movieString) => async (dispatch) => {
   }
 };
 
-export const fetchNowPlaying = () => async (dispatch) => {
+export const fetchNowPlaying = (page) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_SERVER}/movies/now-playing`
+      `${import.meta.env.VITE_SERVER}/movies/now-playing/${page}`
     );
     dispatch(setNowPlaying(response.data.results));
   } catch (err) {
@@ -25,10 +25,10 @@ export const fetchNowPlaying = () => async (dispatch) => {
   }
 };
 
-export const fetchTopRated = () => async (dispatch) => {
+export const fetchTopRated = (page) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_SERVER}/movies/top-rated`
+      `${import.meta.env.VITE_SERVER}/movies/top-rated/${page}`
     );
     dispatch(setTopRated(response.data.results));
   } catch (err) {

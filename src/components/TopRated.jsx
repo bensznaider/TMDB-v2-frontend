@@ -1,14 +1,23 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTopRated } from "../state/thunks/moviesThunk";
 import MovieCard from "../commons/MovieCard";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import {
+  IoIosAddCircle,
+  IoIosArrowBack,
+  IoIosArrowForward,
+  IoIosRemoveCircle,
+} from "react-icons/io";
 
 const TopRated = () => {
+  const dispatch = useDispatch();
+
   const topRated = useSelector((state) => {
     return state.movies.topRated;
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState(1);
 
   const handleNext = () => {
     if (activeIndex < topRated.length - 1) {
@@ -22,9 +31,25 @@ const TopRated = () => {
     }
   };
 
+  const handlePageDown = () => {
+    if (pageIndex > 1) {
+      dispatch(fetchTopRated(pageIndex - 1));
+      setPageIndex(pageIndex - 1);
+    }
+  };
+
+  const handlePageUp = () => {
+    dispatch(fetchTopRated(pageIndex + 1));
+    setPageIndex(pageIndex + 1);
+  };
+
   return (
     <div>
       <div>Top Rated</div>
+      <div>
+        Page <IoIosRemoveCircle onClick={handlePageDown} /> {pageIndex}{" "}
+        <IoIosAddCircle onClick={handlePageUp} />
+      </div>
       <div
         style={{
           height: "2px",

@@ -1,14 +1,23 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchNowPlaying } from "../state/thunks/moviesThunk";
 import MovieCard from "../commons/MovieCard";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import {
+  IoIosAddCircle,
+  IoIosArrowBack,
+  IoIosArrowForward,
+  IoIosRemoveCircle,
+} from "react-icons/io";
 
 const NowPlaying = () => {
+  const dispatch = useDispatch();
+
   const nowPlaying = useSelector((state) => {
     return state.movies.nowPlaying;
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState(1);
 
   const handleNext = () => {
     if (activeIndex < nowPlaying.length - 1) {
@@ -22,9 +31,25 @@ const NowPlaying = () => {
     }
   };
 
+  const handlePageDown = () => {
+    if (pageIndex > 1) {
+      dispatch(fetchNowPlaying(pageIndex - 1));
+      setPageIndex(pageIndex - 1);
+    }
+  };
+
+  const handlePageUp = () => {
+    dispatch(fetchNowPlaying(pageIndex + 1));
+    setPageIndex(pageIndex + 1);
+  };
+
   return (
     <div>
       <div>Now Playing</div>
+      <div>
+        Page <IoIosRemoveCircle onClick={handlePageDown} /> {pageIndex}{" "}
+        <IoIosAddCircle onClick={handlePageUp} />
+      </div>
       <div
         style={{
           height: "2px",
