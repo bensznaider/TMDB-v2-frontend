@@ -90,15 +90,14 @@ body {
   position: relative;
 }
 .welcome-search {
-  width: 20rem;
+  width: 40%;
   padding: 0.5rem;
   border-radius: 0 1.5rem 0;
   font-family: "Oswald", sans-serif;
 }
 .search-button {
   position: absolute;
-  top: 11.2rem;
-  right: 2.5rem;
+  right: 29.2%;
   width: 4rem;
   border-color: #828489;
   border-radius: 0 1.5rem 0;
@@ -124,6 +123,19 @@ body {
   opacity: 0.3;
   cursor: pointer;
 }
+.movie-card-content {
+  position: absolute;
+  top: 4rem;
+  left: 1.8rem;
+  color: white;
+  text-shadow: black 0 0 15px;
+  width: 8rem;
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .selected-movie-container {
   position: relative;
   margin-top: 5.7rem;
@@ -148,24 +160,17 @@ body {
   text-align: center;
 }
 
-/* OJO QUE EN VERSIÓN DESKTOP LA POSITION ABSOLUTE NO VA A SERVIR PARA LA MOVIE CARD */
 @media (max-width: 600px) {
   .blur {
     filter: blur(5px);
     pointer-events: none;
   }
-  .movie-card-content {
-    position: absolute;
-    top: 4rem;
-    left: 1.8rem;
-    color: white;
-    text-shadow: black 0 0 15px;
-    width: 8rem;
-    padding: 1rem;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .welcome-search {
+    width: 70%;
+  }
+  .search-button {
+    right: 12%;
+    width: 4rem;
   }
 }
 
