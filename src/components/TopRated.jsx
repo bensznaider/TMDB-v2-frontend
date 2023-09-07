@@ -47,8 +47,8 @@ const TopRated = () => {
     <div>
       <div>Top Rated</div>
       <div>
-        Page <IoIosRemoveCircle onClick={handlePageDown} /> {pageIndex}{" "}
-        <IoIosAddCircle onClick={handlePageUp} />
+        Page <IoIosRemoveCircle onClick={handlePageDown} style={{cursor: "pointer"}}/> {pageIndex}{" "}
+        <IoIosAddCircle onClick={handlePageUp} style={{cursor: "pointer"}}/>
       </div>
       <div
         style={{
