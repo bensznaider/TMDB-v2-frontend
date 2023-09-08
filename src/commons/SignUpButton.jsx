@@ -4,7 +4,7 @@ const SignUpButton = ({ signUpMenuDisplayed }) => {
   return (
     <button
       className={`${!signUpMenuDisplayed ? 'buttons signup-home' : 'buttons'}`}
-      style={{ borderColor: "white", paddingTop: "1rem" }}
+      style={{ borderColor: "white", padding: 0 }}
     >
       SIGN UP
       {!signUpMenuDisplayed ? <IoIosArrowDown style={{ marginLeft: "5px" }} /> : <></>}

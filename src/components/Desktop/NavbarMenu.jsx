@@ -51,14 +51,13 @@ const NavbarMenuDesktop = () => {
         <span className="navbar-menu">
           <span
             style={{
-              paddingBottom: "1rem",
-              textAlign: "center",
+              margin: "1rem",
               fontSize: "large",
             }}
           >
             {loggedUser.email}
           </span>
-          <span onClick={handleLogout}>
+          <span onClick={handleLogout} style={{margin: "1rem"}}>
             <LogoutButton />
           </span>
         </span>

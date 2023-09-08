@@ -2,7 +2,7 @@ const LogoutButton = () => {
   return (
     <button
       className={'buttons signup-home'}
-      style={{ borderColor: "white", paddingTop: "1rem" }}
+      style={{ borderColor: "white", padding: 0 }}
     >
       LOGOUT
     </button>

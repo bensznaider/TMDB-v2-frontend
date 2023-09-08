@@ -1,10 +1,13 @@
 import { useState } from "react";
 import SignUpButton from "../commons/SignUpButton";
 import { createUser } from "../state/thunks/usersThunk";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SignUp = () => {
   const dispatch = useDispatch();
+
+  const isMobileDevice = useSelector((state) => state.isMobile);
+
   const [signUpForm, setSignUpForm] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -55,13 +58,13 @@ const SignUp = () => {
 
   return (
     <div className="signup-home" style={{ marginBottom: "1rem" }}>
-      <div style={{ margin: "1rem", fontSize: "large" }}>Come join us!</div>
+      <div style={{ margin: "1rem", fontSize: "large" }}>Join us.</div>
       {!signUpForm ? (
         <span onClick={handleSignUpForm}>
           <SignUpButton signUpMenuDisplayed={false} />
         </span>
       ) : (
-        <form onSubmit={handleSignUpRequest}>
+        <form onSubmit={handleSignUpRequest} style={{width: `${isMobileDevice ? "100%" : "40%"}`, margin: "auto"}}>
           <input
             className="welcome-search"
             type="email"
@@ -76,7 +79,7 @@ const SignUp = () => {
             value={password}
             onChange={handleOnChangePassword}
             placeholder="PASSWORD"
-            style={{ marginBottom: "1.5rem" }}
+            style={{ marginBottom: "1.5rem", marginLeft: `${isMobileDevice ? 0 : "1.5rem"}` }}
           />
           <SignUpButton signUpMenuDisplayed={true} />
         </form>
