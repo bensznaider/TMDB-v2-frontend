@@ -12,7 +12,7 @@ import {
 const TopRated = () => {
   const dispatch = useDispatch();
 
-  const [deviceWidth, setDeviceWidth] = useState(window.innerWidth);
+  const deviceWidth = window.innerWidth;
 
   const topRated = useSelector((state) => {
     return state.movies.topRated;
@@ -115,12 +115,28 @@ const TopRated = () => {
             )}
           </>
         ) : (
-          <span>LOADING...</span>
+          <></>
         )}
-         {activeIndex < topRated.length - 1 ? (
+        {deviceWidth <= 600 && activeIndex < topRated.length - 1 && (
           <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
-        ) : (
-          <IoIosArrowForward color={"#b6c2d9"} />
+        )}
+        {deviceWidth > 600 &&
+          deviceWidth <= 800 &&
+          activeIndex < topRated.length - 2 && (
+            <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
+          )}
+        {deviceWidth > 800 &&
+          deviceWidth <= 1000 &&
+          activeIndex < topRated.length - 3 && (
+            <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
+          )}
+        {deviceWidth > 1000 &&
+          deviceWidth <= 1200 &&
+          activeIndex < topRated.length - 4 && (
+            <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
+          )}
+        {deviceWidth > 1200 && activeIndex < topRated.length - 5 && (
+          <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
         )}
       </span>
     </div>
@@ -130,11 +146,5 @@ const TopRated = () => {
 export default TopRated;
 
 /*
-          <>
-            {deviceWidth <= 600 && activeIndex < topRated.length - 1 ? (<IoIosArrowForward onClick={handleNext} cursor={"pointer"} />) : <IoIosArrowForward color={"#b6c2d9"} />}
-            {deviceWidth > 600 && deviceWidth <= 800 && activeIndex < topRated.length - 2 ? (<IoIosArrowForward onClick={handleNext} cursor={"pointer"} />) : <IoIosArrowForward color={"#b6c2d9"} />}
-            {deviceWidth > 800 && deviceWidth <= 1000 && activeIndex < topRated.length - 3 ? (<IoIosArrowForward onClick={handleNext} cursor={"pointer"} />) : <IoIosArrowForward color={"#b6c2d9"} />}
-            {deviceWidth > 1000 && deviceWidth <= 1200 && activeIndex < topRated.length - 4 ? (<IoIosArrowForward onClick={handleNext} cursor={"pointer"} />) : <IoIosArrowForward color={"#b6c2d9"} />}
-            {deviceWidth > 1200 && activeIndex < topRated.length - 5 ? (<IoIosArrowForward onClick={handleNext} cursor={"pointer"} />) : <IoIosArrowForward color={"#b6c2d9"} />}
-          </>
+         
 */
