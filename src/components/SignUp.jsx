@@ -1,12 +1,12 @@
 import { useState } from "react";
 import SignUpButton from "../commons/SignUpButton";
 import { createUser } from "../state/thunks/usersThunk";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const SignUp = () => {
   const dispatch = useDispatch();
 
-  const isMobileDevice = useSelector((state) => state.isMobile);
+  const deviceWidth = window.innerWidth;
 
   const [signUpForm, setSignUpForm] = useState(false);
 
@@ -64,7 +64,7 @@ const SignUp = () => {
           <SignUpButton signUpMenuDisplayed={false} />
         </span>
       ) : (
-        <form onSubmit={handleSignUpRequest} style={{width: `${isMobileDevice ? "100%" : "40%"}`, margin: "auto"}}>
+        <form onSubmit={handleSignUpRequest} style={{width: `${deviceWidth <= 850 ? "70%" : "40%"}`, margin: "auto"}}>
           <input
             className="welcome-search"
             type="email"
@@ -79,7 +79,7 @@ const SignUp = () => {
             value={password}
             onChange={handleOnChangePassword}
             placeholder="PASSWORD"
-            style={{ marginBottom: "1.5rem", marginLeft: `${isMobileDevice ? 0 : "1.5rem"}` }}
+            style={{ marginBottom: "1.5rem", marginLeft: `${deviceWidth <= 850 ? 0 : "1.5rem"}` }}
           />
           <SignUpButton signUpMenuDisplayed={true} />
         </form>

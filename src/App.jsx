@@ -4,7 +4,6 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setIsMobile } from "./state/slices/isMobileSlice";
 import { fetchNowPlaying, fetchTopRated } from "./state/thunks/moviesThunk";
 import { reloadUser } from "./state/thunks/usersThunk";
 import { Routes, Route } from "react-router";
@@ -15,7 +14,6 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setIsMobile(window.matchMedia("(max-width: 600px)").matches));
     dispatch(fetchNowPlaying(1));
     dispatch(fetchTopRated(1));
   }, []);
@@ -44,22 +42,6 @@ function App() {
       <Navbar toggleMenu={toggleMenu} />
       <Routes>
         <Route path="/" element={<Home isMenuOpen={isMenuOpen} />}></Route>
-        <Route
-          path="/signup"
-          element={
-            <h1 style={{ marginTop: "6rem" }} isMenuOpen={isMenuOpen}>
-              SIGN UP
-            </h1>
-          }
-        ></Route>
-        <Route
-          path="/login"
-          element={
-            <h1 style={{ marginTop: "6rem" }} isMenuOpen={isMenuOpen}>
-              LOGIN
-            </h1>
-          }
-        ></Route>
         <Route
           path="/movie/:movieId"
           element={<SelectedMovie isMenuOpen={isMenuOpen} />}

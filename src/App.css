@@ -154,7 +154,7 @@ body {
   text-align: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 850px) {
   .blur {
     filter: blur(5px);
     pointer-events: none;
@@ -189,28 +189,3 @@ body {
     width: 4rem;
   }
 }
-
-/*
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
- */

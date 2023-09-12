@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { Spin as Hamburger } from "hamburger-react";
 import NavbarMenuDesktop from "./Desktop/NavbarMenu";
 import NavbarMenuMobile from "./Mobile/NavbarMenu";
 
 const Navbar = ({ toggleMenu }) => {
-  const isMobileDevice = useSelector((state) => state.isMobile);
+  const deviceWidth = window.innerWidth;
   const [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -25,7 +24,7 @@ const Navbar = ({ toggleMenu }) => {
         <h1 id="logo" onClick={handleLogoClick}>
           TMDB
         </h1>
-        {isMobileDevice ? (
+        {deviceWidth <= 850 ? (
           <>
             <Hamburger toggled={isOpen} toggle={handleMenuClick} />
             <NavbarMenuMobile isOpen={isOpen} />
@@ -33,7 +32,7 @@ const Navbar = ({ toggleMenu }) => {
         ) : (
           <></>
         )}
-        {!isMobileDevice ? <NavbarMenuDesktop /> : <></>}
+        {deviceWidth > 850 ? <NavbarMenuDesktop /> : <></>}
       </div>
     </>
   );
