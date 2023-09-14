@@ -15,10 +15,15 @@ const Welcome = ({ toggleSearch }) => {
     setMovieName(event.target.value)
   }
 
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     event.preventDefault()
-    toggleSearch()
-    dispatch(fetchMoviesByString(movieName))
+    const searchResults = await dispatch(fetchMoviesByString(movieName, 1))
+    if (searchResults.length > 0) {
+      toggleSearch(movieName, true)
+    }
+    else {
+      toggleSearch(movieName, false)
+    }
   }
 
   return (

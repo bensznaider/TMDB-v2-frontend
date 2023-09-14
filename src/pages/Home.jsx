@@ -9,17 +9,24 @@ import Favorites from "../components/Favorites";
 
 const Home = ({ isMenuOpen }) => {
   const [searchClickedOn, setSearchClickedOn] = useState(false)
+  const [movieSearchString, setMovieSearchString] = useState("")
+  const [searchHadResults, setSearchHadResults] = useState(true)
 
   const loggedUser = useSelector((state) => state.loggedUser);
 
-  const toggleSearch = () => {
+  const toggleSearch = (movieName, boolean) => {
     setSearchClickedOn(true)
+    setMovieSearchString(movieName)
+    setSearchHadResults(boolean)
+    setTimeout(() => {
+      setSearchHadResults(true)
+    }, 3000);
   }
 
   return (
     <div className={`${isMenuOpen ? 'blur' : ''}`} style={{ textAlign: "center" }}>
       <Welcome toggleSearch={toggleSearch}/>
-      {searchClickedOn ? <SearchResults /> : <></>}
+      {searchClickedOn ? <SearchResults movieString={movieSearchString} hadResults={searchHadResults}/> : <></>}
       {loggedUser.userId ? <Favorites /> : <SignUp />}
       <TopRated />
       <NowPlaying />
