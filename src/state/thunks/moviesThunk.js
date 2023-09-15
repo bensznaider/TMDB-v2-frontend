@@ -3,12 +3,17 @@ import { setNowPlaying, setTopRated, setSearchResults } from "../slices/moviesSl
 
 axios.defaults.withCredentials = true;
 
-export const fetchMoviesByString = (movieString, page) => async (dispatch) => {
+export const fetchMoviesByString = (movieString, page, newSearch) => async (dispatch) => {
   try {
     const response = await axios.get(
       `${import.meta.env.VITE_SERVER}/movies/search?movie=${movieString}&page=${page}`
     );
-    dispatch(setSearchResults(response.data.results))
+    if (newSearch) {
+      dispatch(setSearchResults(response.data.results))
+    }
+    else if (!newSearch && response.data.results.length > 0) {
+      dispatch(setSearchResults(response.data.results))
+    }
     return response.data.results
   } catch (err) {
     console.error("Fetch Movies By String error: ", err);

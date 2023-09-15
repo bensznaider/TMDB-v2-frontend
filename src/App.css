@@ -58,6 +58,9 @@ body {
   background: linear-gradient(#272932, #353844);
   color: #b6c2d9;
   padding: 0.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 .welcome-posters-container {
   background-color: #272932;

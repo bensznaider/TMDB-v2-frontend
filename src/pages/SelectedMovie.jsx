@@ -22,10 +22,11 @@ const SelectedMovie = ({ isMenuOpen }) => {
     const setFavFunction = async () => {
       try {
         if (loggedUser.userId) {
-          const favs = await dispatch(getFavorites(loggedUser.userId))
+          const favs = await dispatch(getFavorites(loggedUser.userId));
           if (favs.data.find((fav) => fav.tmdbId === parseInt(movieId))) {
-            setIsFav(true)};
-        };
+            setIsFav(true);
+          }
+        }
       } catch (error) {
         console.log(error);
       }
@@ -79,7 +80,13 @@ const SelectedMovie = ({ isMenuOpen }) => {
       {!movie ? (
         <div
           className={`${isMenuOpen ? "blur" : ""}`}
-          style={{ margin: "13rem 12rem" }}
+          style={{
+            minHeight: "96vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "large",
+          }}
         >
           LOADING...
         </div>

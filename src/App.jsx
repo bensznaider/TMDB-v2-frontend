@@ -2,6 +2,7 @@ import "./App.css";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchNowPlaying, fetchTopRated } from "./state/thunks/moviesThunk";
@@ -46,6 +47,7 @@ function App() {
           path="/movie/:movieId"
           element={<SelectedMovie isMenuOpen={isMenuOpen} />}
         ></Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer isMenuOpen={isMenuOpen} />
     </>

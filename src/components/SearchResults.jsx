@@ -54,14 +54,16 @@ const SearchResults = ({ movieString, hadResults }) => {
 
   const handlePageUp = async () => {
     const pageUpResults = await dispatch(
-      fetchMoviesByString(movieString, pageIndex + 1)
+      fetchMoviesByString(movieString, pageIndex + 1, false)
     );
     if (pageUpResults.length > 0) {
       setPageIndex(pageIndex + 1);
       setActiveIndex(0);
     } else {
-      dispatch(fetchMoviesByString(movieString, pageIndex))
       setNoMoreResults(true);
+      setInterval(() => {
+        setNoMoreResults(false);
+      }, 3000);
     }
   };
 
