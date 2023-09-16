@@ -12,6 +12,8 @@ import {
 const SearchResults = ({ movieString, hadResults }) => {
   const dispatch = useDispatch();
 
+  const deviceWidth = window.innerWidth;
+
   const results = useSelector((state) => {
     return state.movies.searchResults;
   });
@@ -104,14 +106,62 @@ const SearchResults = ({ movieString, hadResults }) => {
         )}
 
         {results ? (
-          <MovieCard movie={results[activeIndex]} />
+          <>
+            {deviceWidth <= 600 && <MovieCard movie={results[activeIndex]} />}
+            {deviceWidth > 600 && deviceWidth <= 800 && (
+              <>
+                <MovieCard movie={results[activeIndex]} />
+                <MovieCard movie={results[activeIndex + 1]} />
+              </>
+            )}
+            {deviceWidth > 800 && deviceWidth <= 1000 && (
+              <>
+                <MovieCard movie={results[activeIndex]} />
+                <MovieCard movie={results[activeIndex + 1]} />
+                <MovieCard movie={results[activeIndex + 2]} />
+              </>
+            )}
+            {deviceWidth > 1000 && deviceWidth <= 1200 && (
+              <>
+                <MovieCard movie={results[activeIndex]} />
+                <MovieCard movie={results[activeIndex + 1]} />
+                <MovieCard movie={results[activeIndex + 2]} />
+                <MovieCard movie={results[activeIndex + 3]} />
+              </>
+            )}
+            {deviceWidth > 1200 && (
+              <>
+                <MovieCard movie={results[activeIndex]} />
+                <MovieCard movie={results[activeIndex + 1]} />
+                <MovieCard movie={results[activeIndex + 2]} />
+                <MovieCard movie={results[activeIndex + 3]} />
+                <MovieCard movie={results[activeIndex + 4]} />
+              </>
+            )}
+          </>
         ) : (
           <span>LOADING...</span>
         )}
-        {activeIndex < results.length - 1 ? (
+        {deviceWidth <= 600 && activeIndex < results.length - 1 && (
           <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
-        ) : (
-          <IoIosArrowForward color={"#b6c2d9"} />
+        )}
+        {deviceWidth > 600 &&
+          deviceWidth <= 800 &&
+          activeIndex < results.length - 2 && (
+            <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
+          )}
+        {deviceWidth > 800 &&
+          deviceWidth <= 1000 &&
+          activeIndex < results.length - 3 && (
+            <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
+          )}
+        {deviceWidth > 1000 &&
+          deviceWidth <= 1200 &&
+          activeIndex < results.length - 4 && (
+            <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
+          )}
+        {deviceWidth > 1200 && activeIndex < results.length - 5 && (
+          <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
         )}
       </span>
     </div>
