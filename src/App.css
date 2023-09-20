@@ -57,7 +57,6 @@ body {
 .footer {
   background: linear-gradient(#272932, #353844);
   color: #b6c2d9;
-  padding: 0.5rem;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -134,25 +133,20 @@ body {
 }
 .selected-movie-container {
   position: relative;
+  background-color: #353844;
   margin-top: 5.7rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-.selected-movie-background {
-  position: relative;
-  opacity: 0.3;
+  align-items: center;
 }
 .selected-movie-content {
   position: absolute;
-  top: 1rem;
-  padding: 0.8rem;
+  top: 0;
   color: white;
   text-shadow: black 0 0 15px;
-  font-size: small;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   text-align: center;
 }
 
