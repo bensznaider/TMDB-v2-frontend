@@ -13,15 +13,15 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
   const loggedUser = useSelector((state) => state.loggedUser);
   const [isFav, setIsFav] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [movieContentHeight, setMovieContentHeight] = useState(null);
+  const [posterHeight, setPosterHeight] = useState(null);
+
+  const deviceWidth = window.innerWidth;
 
   useEffect(() => {
-    if (document.getElementById("movie-content").clientHeight) {
-      setMovieContentHeight(
-        document.getElementById("movie-content").clientHeight
-      );
+    if (document.getElementById("movie-content")) {
+      setPosterHeight(document.getElementById("movie-content").clientHeight);
     }
-  }, [movie]);
+  }, []);
 
   useEffect(() => {
     const setFavFunction = async () => {
@@ -77,16 +77,17 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
       {movie && !completeCast ? (
         <div
           className={`selected-movie-container ${isMenuOpen ? "blur" : ""}`}
-          style={{ overflowX: "hidden", minHeight: "100vh" }}
+          style={{ overflowX: "hidden" }}
         >
           <div
             style={{
               position: "relative",
-              width: "100vw",
-              maxWidth: "500px",
+              width: "66vh",
+              maxWidth: `${deviceWidth <= 850 ? "100vw" : ""}`,
+              minHeight: "100vh",
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
+              alignItems: "center"
             }}
           >
             <img
@@ -94,7 +95,8 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
               alt="<Movie poster>"
               style={{
                 opacity: 0.3,
-                height: `760px`,
+                minHeight: "100vh",
+                height: `${posterHeight ? `${posterHeight}px` : "auto"}`
               }}
             />
             <div id="movie-content" className="selected-movie-content">
@@ -169,7 +171,9 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
                 <div>
                   {movie.credits.cast
                     .slice(0, 5)
-                    .map((actor) => `${actor.name} (${actor.character}), `)}
+                    .map(
+                      (actor) => `${actor.name} (${actor.character || "N/A"}), `
+                    )}
                   <span
                     style={{ fontStyle: "italic", cursor: "pointer" }}
                     onClick={handleCompleteCast}
@@ -190,33 +194,46 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
       {movie && completeCast ? (
         <div
           className={`selected-movie-container ${isMenuOpen ? "blur" : ""}`}
-          style={{ overflowX: "hidden", minHeight: "100vh" }}
+          style={{ overflowX: "hidden" }}
         >
-          <img
-            src={`https://image.tmdb.org/t/p/${posterSize}${movie.data.poster_path}`}
-            alt="<Movie poster>"
+            <div
             style={{
-              opacity: 0.3,
-              height: `${movieContentHeight}px`,
-              width: "max-content",
+              position: "relative",
+              width: "66vh",
+              maxWidth: `${deviceWidth <= 850 ? "100vw" : ""}`,
+              minHeight: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
             }}
-          />
-
-          <div id="movie-content" className="selected-movie-content">
-            <span style={{ margin: "0.5rem" }}>
-              <div>Cast:</div>
-              <div>
-                {movie.credits.cast
-                  .slice(0, 60)
-                  .map((actor) => `${actor.name} (${actor.character}), `)}
-                <span
-                  style={{ fontStyle: "italic", cursor: "pointer" }}
-                  onClick={handleCompleteCast}
-                >
-                  (back)
-                </span>
-              </div>
-            </span>
+          >
+            <img
+              src={`https://image.tmdb.org/t/p/${posterSize}${movie.data.poster_path}`}
+              alt="<Movie poster>"
+              style={{
+                opacity: 0.3,
+                minHeight: "100vh",
+                height: `${posterHeight ? `${posterHeight}px` : "auto"}`
+              }}
+            />
+            <div className="selected-movie-content">
+              <span style={{ margin: "0.5rem" }}>
+                <div>Cast:</div>
+                <div>
+                  {movie.credits.cast
+                    .slice(0, 60)
+                    .map(
+                      (actor) => `${actor.name} (${actor.character || "N/A"}), `
+                    )}
+                  <span
+                    style={{ fontStyle: "italic", cursor: "pointer" }}
+                    onClick={handleCompleteCast}
+                  >
+                    (back)
+                  </span>
+                </div>
+              </span>
+            </div>
           </div>
         </div>
       ) : (

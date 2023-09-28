@@ -37,33 +37,57 @@ const SelectedMovie = ({ isMenuOpen }) => {
       ) : (
         <></>
       )}
-      {deviceWidth <= 800 && movie && (
-        <span style={{
-          fontSize: "large",
-        }}>
-        <MovieData
-          movie={movie}
-          isMenuOpen={isMenuOpen}
-          posterSize={"w780"}
-        />
+      {deviceWidth <= 850 && movie && (
+        <span
+          style={{
+            fontSize: "large",
+          }}
+        >
+          <MovieData
+            movie={movie}
+            isMenuOpen={isMenuOpen}
+            posterSize={"w780"}
+          />
         </span>
       )}
-      {deviceWidth > 800 && movie && (
-        <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
-          <img
-            src={`https://image.tmdb.org/t/p/w342${movie.data.poster_path}`}
-            alt="<Movie poster>"
-            style={{marginTop: "5.7rem", height: "600px"}}
-          />
-        <span style={{
-          fontSize: "small"
-        }}>
-        <MovieData
-          movie={movie}
-          isMenuOpen={isMenuOpen}
-          posterSize={"w342"}
-        />
-        </span>
+      {deviceWidth > 850 && movie && (
+        <div
+          className={`${isMenuOpen ? "blur" : ""}`}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            backgroundColor: "#353844",
+          }}
+        >
+          <span
+            style={{
+              width: `${deviceWidth / 2}px`,         
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "end" ,
+              marginTop: "5.7rem",
+            }}
+          >
+            <img
+              src={`https://image.tmdb.org/t/p/w342${movie.data.poster_path}`}
+              alt="<Movie poster>"
+              style={{
+                height: `100vh`,
+                
+              }}
+            />
+          </span>
+          <span
+            style={{
+              fontSize: "large",
+            }}
+          >
+            <MovieData
+              movie={movie}
+              isMenuOpen={isMenuOpen}
+              posterSize={"w342"}
+            />
+          </span>
         </div>
       )}
     </>
