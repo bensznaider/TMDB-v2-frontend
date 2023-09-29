@@ -7,20 +7,23 @@ import {
   removeFavorite,
 } from "../state/thunks/favoritesThunk";
 
-const MovieData = ({ movie, isMenuOpen, posterSize }) => {
+const MovieData = ({
+  movie,
+  isMenuOpen,
+  posterSize,
+  handlePosterHeight,
+  posterHeight,
+}) => {
   const dispatch = useDispatch();
   const [completeCast, setCompleteCast] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
   const [isFav, setIsFav] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [posterHeight, setPosterHeight] = useState(null);
+  const [favMessage, setFavMessage] = useState(null);
 
   const deviceWidth = window.innerWidth;
 
   useEffect(() => {
-    if (document.getElementById("movie-content")) {
-      setPosterHeight(document.getElementById("movie-content").clientHeight);
-    }
+    handlePosterHeight();
   }, []);
 
   useEffect(() => {
@@ -43,11 +46,11 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
     !completeCast ? setCompleteCast(true) : setCompleteCast(false);
   };
 
-  const handleFavorite = () => {
+  const handleFavorite = async () => {
     if (!loggedUser.userId) {
-      setErrorMessage("Please log in to add favorites.");
+      setFavMessage("Please log in to add favorites.");
       setTimeout(() => {
-        setErrorMessage(null);
+        setFavMessage(null);
       }, 3000);
     } else if (isFav && loggedUser.userId) {
       const movieData = {
@@ -57,8 +60,19 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
         year: movie.data.release_date.substring(0, 4),
         posterURL: movie.data.poster_path,
       };
-      dispatch(removeFavorite(movieData));
-      setIsFav(false);
+      const favResult = await dispatch(removeFavorite(movieData));
+      if (favResult.status === 200) {
+        setFavMessage("Movie successfully removed from favorites list.");
+        setTimeout(() => {
+          setFavMessage(null);
+        }, 3000);
+        setIsFav(false);
+      } else {
+        setFavMessage("Movie couldn't be removed from favorites list.");
+        setTimeout(() => {
+          setFavMessage(null);
+        }, 3000);
+      }
     } else if (!isFav && loggedUser.userId) {
       const movieData = {
         title: movie.data.original_title,
@@ -67,8 +81,19 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
         year: movie.data.release_date.substring(0, 4),
         posterURL: movie.data.poster_path,
       };
-      dispatch(addFavorite(movieData));
-      setIsFav(true);
+      const favResult = await dispatch(addFavorite(movieData));
+      if (favResult.status === 201) {
+        setFavMessage("Movie successfully added to favorites list.");
+        setTimeout(() => {
+          setFavMessage(null);
+        }, 3000);
+        setIsFav(true);
+      } else {
+        setFavMessage("Movie couldn't be added to favorites list.");
+        setTimeout(() => {
+          setFavMessage(null);
+        }, 3000);
+      }
     }
   };
 
@@ -82,12 +107,17 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
           <div
             style={{
               position: "relative",
-              width: "66vh",
+              marginRight: `${
+                deviceWidth >= 650 && deviceWidth < 850 ? "4rem" : ""
+              }`,
+              marginLeft: `${
+                deviceWidth >= 650 && deviceWidth < 850 ? "4rem" : ""
+              }`,
               maxWidth: `${deviceWidth <= 850 ? "100vw" : ""}`,
               minHeight: "100vh",
               display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <img
@@ -96,7 +126,7 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
               style={{
                 opacity: 0.3,
                 minHeight: "100vh",
-                height: `${posterHeight ? `${posterHeight}px` : "auto"}`
+                height: `${posterHeight ? `${posterHeight}px` : "auto"}`,
               }}
             />
             <div id="movie-content" className="selected-movie-content">
@@ -116,7 +146,7 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
                   {isFav ? <MdFavorite /> : <MdFavoriteBorder />}
                 </span>
               </span>
-              {errorMessage && (
+              {favMessage && (
                 <span
                   style={{
                     background: "#b6c2d9",
@@ -128,7 +158,7 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
                     textShadow: "none",
                   }}
                 >
-                  {errorMessage}
+                  {favMessage}
                 </span>
               )}
               <span style={{ margin: "0.5rem" }}>{movie.data.overview}</span>
@@ -196,15 +226,20 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
           className={`selected-movie-container ${isMenuOpen ? "blur" : ""}`}
           style={{ overflowX: "hidden" }}
         >
-            <div
+          <div
             style={{
               position: "relative",
-              width: "66vh",
+              marginRight: `${
+                deviceWidth >= 650 && deviceWidth < 850 ? "4rem" : ""
+              }`,
+              marginLeft: `${
+                deviceWidth >= 650 && deviceWidth < 850 ? "4rem" : ""
+              }`,
               maxWidth: `${deviceWidth <= 850 ? "100vw" : ""}`,
               minHeight: "100vh",
               display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <img
@@ -213,7 +248,7 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
               style={{
                 opacity: 0.3,
                 minHeight: "100vh",
-                height: `${posterHeight ? `${posterHeight}px` : "auto"}`
+                height: `${posterHeight ? `${posterHeight}px` : "auto"}`,
               }}
             />
             <div className="selected-movie-content">

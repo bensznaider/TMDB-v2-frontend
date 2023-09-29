@@ -8,6 +8,13 @@ const SelectedMovie = ({ isMenuOpen }) => {
   const dispatch = useDispatch();
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
+  const [posterHeight, setPosterHeight] = useState(null);
+
+  const handlePosterHeight = () => {
+    if (document.getElementById("movie-content")) {
+      setPosterHeight(document.getElementById("movie-content").clientHeight);
+    }
+  }
 
   const deviceWidth = window.innerWidth;
 
@@ -47,6 +54,8 @@ const SelectedMovie = ({ isMenuOpen }) => {
             movie={movie}
             isMenuOpen={isMenuOpen}
             posterSize={"w780"}
+            handlePosterHeight={handlePosterHeight}
+            posterHeight={posterHeight}
           />
         </span>
       )}
@@ -72,8 +81,8 @@ const SelectedMovie = ({ isMenuOpen }) => {
               src={`https://image.tmdb.org/t/p/w342${movie.data.poster_path}`}
               alt="<Movie poster>"
               style={{
-                height: `100vh`,
-                
+                minHeight: "100vh",
+                height: `${posterHeight}px`
               }}
             />
           </span>
@@ -86,6 +95,8 @@ const SelectedMovie = ({ isMenuOpen }) => {
               movie={movie}
               isMenuOpen={isMenuOpen}
               posterSize={"w342"}
+              handlePosterHeight={handlePosterHeight}
+              posterHeight={posterHeight}
             />
           </span>
         </div>
