@@ -8,17 +8,11 @@ const SelectedMovie = ({ isMenuOpen }) => {
   const dispatch = useDispatch();
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
-  const [posterHeight, setPosterHeight] = useState(null);
-
-  const handlePosterHeight = () => {
-    if (document.getElementById("movie-content")) {
-      setPosterHeight(document.getElementById("movie-content").clientHeight);
-    }
-  }
 
   const deviceWidth = window.innerWidth;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getMovieDetails = async () => {
       const movie = await dispatch(fetchMovieDetails(movieId));
       setMovie(movie);
@@ -54,8 +48,6 @@ const SelectedMovie = ({ isMenuOpen }) => {
             movie={movie}
             isMenuOpen={isMenuOpen}
             posterSize={"w780"}
-            handlePosterHeight={handlePosterHeight}
-            posterHeight={posterHeight}
           />
         </span>
       )}
@@ -70,10 +62,10 @@ const SelectedMovie = ({ isMenuOpen }) => {
         >
           <span
             style={{
-              width: `${deviceWidth / 2}px`,         
+              width: `${deviceWidth / 2}px`,
               display: "flex",
               flexDirection: "column",
-              alignItems: "end" ,
+              alignItems: "end",
               marginTop: "5.7rem",
             }}
           >
@@ -82,21 +74,18 @@ const SelectedMovie = ({ isMenuOpen }) => {
               alt="<Movie poster>"
               style={{
                 minHeight: "100vh",
-                height: `${posterHeight}px`
               }}
             />
           </span>
           <span
             style={{
-              fontSize: "large",
+              fontSize: "14px",
             }}
           >
             <MovieData
               movie={movie}
               isMenuOpen={isMenuOpen}
               posterSize={"w342"}
-              handlePosterHeight={handlePosterHeight}
-              posterHeight={posterHeight}
             />
           </span>
         </div>

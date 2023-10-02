@@ -7,13 +7,7 @@ import {
   removeFavorite,
 } from "../state/thunks/favoritesThunk";
 
-const MovieData = ({
-  movie,
-  isMenuOpen,
-  posterSize,
-  handlePosterHeight,
-  posterHeight,
-}) => {
+const MovieData = ({ movie, isMenuOpen, posterSize }) => {
   const dispatch = useDispatch();
   const [completeCast, setCompleteCast] = useState(false);
   const loggedUser = useSelector((state) => state.loggedUser);
@@ -21,10 +15,6 @@ const MovieData = ({
   const [favMessage, setFavMessage] = useState(null);
 
   const deviceWidth = window.innerWidth;
-
-  useEffect(() => {
-    handlePosterHeight();
-  }, []);
 
   useEffect(() => {
     const setFavFunction = async () => {
@@ -126,7 +116,6 @@ const MovieData = ({
               style={{
                 opacity: 0.3,
                 minHeight: "100vh",
-                height: `${posterHeight ? `${posterHeight}px` : "auto"}`,
               }}
             />
             <div id="movie-content" className="selected-movie-content">
@@ -248,7 +237,6 @@ const MovieData = ({
               style={{
                 opacity: 0.3,
                 minHeight: "100vh",
-                height: `${posterHeight ? `${posterHeight}px` : "auto"}`,
               }}
             />
             <div className="selected-movie-content">

@@ -24,7 +24,7 @@ const Home = ({ isMenuOpen }) => {
   }
 
   return (
-    <div className={`${isMenuOpen ? 'blur' : ''}`} style={{ textAlign: "center" }}>
+    <div className={`${isMenuOpen ? 'blur' : ''}`} style={{ textAlign: "center", minHeight: "100vh" }}>
       <Welcome toggleSearch={toggleSearch}/>
       {searchClickedOn ? <SearchResults movieString={movieSearchString} hadResults={searchHadResults}/> : <></>}
       {loggedUser.userId ? <Favorites /> : <SignUp />}
