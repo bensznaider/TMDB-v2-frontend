@@ -38,6 +38,9 @@ const NavbarMenuDesktop = () => {
     } catch (error) {
       console.error("Error during login: ", error);
       setErrorMessage("Incorrect email or password");
+      setTimeout(()=>{
+        setErrorMessage(null)
+      },3000)
     }
   };
 

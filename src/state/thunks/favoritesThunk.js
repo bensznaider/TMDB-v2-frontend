@@ -14,15 +14,18 @@ export const getFavorites = (userId) => async () => {
 };
 
 export const addFavorite = (movieData) => async () => {
-  const {title, tmdbId, userId, year, posterURL} = movieData
+  const { title, tmdbId, userId, year, posterURL, voteAverage } = movieData;
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_SERVER}/favorites/add-favorite`,
-      {title: title,
+      {
+        title: title,
         tmdbId: tmdbId,
         userId: userId,
         year: year,
-        posterURL: posterURL},
+        posterURL: posterURL,
+        voteAverage: voteAverage,
+      }
     );
     return response;
   } catch (err) {
@@ -31,7 +34,7 @@ export const addFavorite = (movieData) => async () => {
 };
 
 export const removeFavorite = (movieData) => async () => {
-  const {tmdbId, userId} = movieData
+  const { tmdbId, userId } = movieData;
   try {
     const response = await axios.delete(
       `${import.meta.env.VITE_SERVER}/favorites/remove-favorite`,

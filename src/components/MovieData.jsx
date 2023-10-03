@@ -70,6 +70,7 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
         userId: loggedUser.userId,
         year: movie.data.release_date.substring(0, 4),
         posterURL: movie.data.poster_path,
+        voteAverage: movie.data.vote_average,
       };
       const favResult = await dispatch(addFavorite(movieData));
       if (favResult.status === 201) {

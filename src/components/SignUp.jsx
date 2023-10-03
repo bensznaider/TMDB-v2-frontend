@@ -45,10 +45,16 @@ const SignUp = () => {
         });
         setEmail("");
         setPassword("");
+        setTimeout(() => {
+          setCorrectSignUp(false);
+        }, 3000);
       }
     } catch (error) {
       console.error("Error during signup: ", error);
       setErrorMessage(error.response.data);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 3000);
       document.getElementById("result-message").scrollIntoView({
         behavior: "smooth",
         block: "center",
@@ -64,7 +70,13 @@ const SignUp = () => {
           <SignUpButton signUpMenuDisplayed={false} />
         </span>
       ) : (
-        <form onSubmit={handleSignUpRequest} style={{width: `${deviceWidth <= 850 ? "70%" : "40%"}`, margin: "auto"}}>
+        <form
+          onSubmit={handleSignUpRequest}
+          style={{
+            width: `${deviceWidth <= 850 ? "70%" : "40%"}`,
+            margin: "auto",
+          }}
+        >
           <input
             className="welcome-search"
             type="email"
@@ -79,7 +91,10 @@ const SignUp = () => {
             value={password}
             onChange={handleOnChangePassword}
             placeholder="PASSWORD"
-            style={{ marginBottom: "1.5rem", marginLeft: `${deviceWidth <= 850 ? 0 : "1.5rem"}` }}
+            style={{
+              marginBottom: "1.5rem",
+              marginLeft: `${deviceWidth <= 850 ? 0 : "1.5rem"}`,
+            }}
           />
           <SignUpButton signUpMenuDisplayed={true} />
         </form>

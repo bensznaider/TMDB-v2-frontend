@@ -77,6 +77,7 @@ const Favorites = () => {
                   original_title: favorites[activeIndex].title,
                   release_date: favorites[activeIndex].year.toString(),
                   poster_path: favorites[activeIndex].posterURL,
+                  vote_average: favorites[activeIndex].voteAverage,
                 }}
               />
             )}
@@ -88,16 +89,20 @@ const Favorites = () => {
                     original_title: favorites[activeIndex].title,
                     release_date: favorites[activeIndex].year.toString(),
                     poster_path: favorites[activeIndex].posterURL,
+                    vote_average: favorites[activeIndex].voteAverage,
                   }}
                 />
-                <MovieCard
-                  movie={{
-                    id: favorites[activeIndex + 1].tmdbId,
-                    original_title: favorites[activeIndex + 1].title,
-                    release_date: favorites[activeIndex + 1].year.toString(),
-                    poster_path: favorites[activeIndex + 1].posterURL,
-                  }}
-                />
+                {favorites[activeIndex + 1] && (
+                  <MovieCard
+                    movie={{
+                      id: favorites[activeIndex + 1].tmdbId,
+                      original_title: favorites[activeIndex + 1].title,
+                      release_date: favorites[activeIndex + 1].year.toString(),
+                      poster_path: favorites[activeIndex + 1].posterURL,
+                      vote_average: favorites[activeIndex + 1].voteAverage,
+                    }}
+                  />
+                )}
               </>
             )}
             {deviceWidth > 800 && deviceWidth <= 1000 && (
@@ -108,24 +113,31 @@ const Favorites = () => {
                     original_title: favorites[activeIndex].title,
                     release_date: favorites[activeIndex].year.toString(),
                     poster_path: favorites[activeIndex].posterURL,
+                    vote_average: favorites[activeIndex].voteAverage,
                   }}
                 />
-                <MovieCard
-                  movie={{
-                    id: favorites[activeIndex + 1].tmdbId,
-                    original_title: favorites[activeIndex + 1].title,
-                    release_date: favorites[activeIndex + 1].year.toString(),
-                    poster_path: favorites[activeIndex + 1].posterURL,
-                  }}
-                />
-                <MovieCard
-                  movie={{
-                    id: favorites[activeIndex + 2].tmdbId,
-                    original_title: favorites[activeIndex + 2].title,
-                    release_date: favorites[activeIndex + 2].year.toString(),
-                    poster_path: favorites[activeIndex + 2].posterURL,
-                  }}
-                />
+                {favorites[activeIndex + 1] && (
+                  <MovieCard
+                    movie={{
+                      id: favorites[activeIndex + 1].tmdbId,
+                      original_title: favorites[activeIndex + 1].title,
+                      release_date: favorites[activeIndex + 1].year.toString(),
+                      poster_path: favorites[activeIndex + 1].posterURL,
+                      vote_average: favorites[activeIndex + 1].voteAverage,
+                    }}
+                  />
+                )}
+                {favorites[activeIndex + 2] && (
+                  <MovieCard
+                    movie={{
+                      id: favorites[activeIndex + 2].tmdbId,
+                      original_title: favorites[activeIndex + 2].title,
+                      release_date: favorites[activeIndex + 2].year.toString(),
+                      poster_path: favorites[activeIndex + 2].posterURL,
+                      vote_average: favorites[activeIndex + 2].voteAverage,
+                    }}
+                  />
+                )}
               </>
             )}
             {deviceWidth > 1000 && deviceWidth <= 1200 && (
@@ -136,32 +148,42 @@ const Favorites = () => {
                     original_title: favorites[activeIndex].title,
                     release_date: favorites[activeIndex].year.toString(),
                     poster_path: favorites[activeIndex].posterURL,
+                    vote_average: favorites[activeIndex].voteAverage,
                   }}
                 />
-                <MovieCard
-                  movie={{
-                    id: favorites[activeIndex + 1].tmdbId,
-                    original_title: favorites[activeIndex + 1].title,
-                    release_date: favorites[activeIndex + 1].year.toString(),
-                    poster_path: favorites[activeIndex + 1].posterURL,
-                  }}
-                />
-                <MovieCard
-                  movie={{
-                    id: favorites[activeIndex + 2].tmdbId,
-                    original_title: favorites[activeIndex + 2].title,
-                    release_date: favorites[activeIndex + 2].year.toString(),
-                    poster_path: favorites[activeIndex + 2].posterURL,
-                  }}
-                />
-                <MovieCard
-                  movie={{
-                    id: favorites[activeIndex + 3].tmdbId,
-                    original_title: favorites[activeIndex + 3].title,
-                    release_date: favorites[activeIndex + 3].year.toString(),
-                    poster_path: favorites[activeIndex + 3].posterURL,
-                  }}
-                />
+                {favorites[activeIndex + 1] && (
+                  <MovieCard
+                    movie={{
+                      id: favorites[activeIndex + 1].tmdbId,
+                      original_title: favorites[activeIndex + 1].title,
+                      release_date: favorites[activeIndex + 1].year.toString(),
+                      poster_path: favorites[activeIndex + 1].posterURL,
+                      vote_average: favorites[activeIndex + 1].voteAverage,
+                    }}
+                  />
+                )}
+                {favorites[activeIndex + 2] && (
+                  <MovieCard
+                    movie={{
+                      id: favorites[activeIndex + 2].tmdbId,
+                      original_title: favorites[activeIndex + 2].title,
+                      release_date: favorites[activeIndex + 2].year.toString(),
+                      poster_path: favorites[activeIndex + 2].posterURL,
+                      vote_average: favorites[activeIndex + 2].voteAverage,
+                    }}
+                  />
+                )}
+                {favorites[activeIndex + 3] && (
+                  <MovieCard
+                    movie={{
+                      id: favorites[activeIndex + 3].tmdbId,
+                      original_title: favorites[activeIndex + 3].title,
+                      release_date: favorites[activeIndex + 3].year.toString(),
+                      poster_path: favorites[activeIndex + 3].posterURL,
+                      vote_average: favorites[activeIndex + 3].voteAverage,
+                    }}
+                  />
+                )}
               </>
             )}
             {deviceWidth > 1200 && (
@@ -172,55 +194,52 @@ const Favorites = () => {
                     original_title: favorites[activeIndex].title,
                     release_date: favorites[activeIndex].year.toString(),
                     poster_path: favorites[activeIndex].posterURL,
+                    vote_average: favorites[activeIndex].voteAverage,
                   }}
                 />
-                {favorites[activeIndex + 1] ? (
+                {favorites[activeIndex + 1] && (
                   <MovieCard
                     movie={{
                       id: favorites[activeIndex + 1].tmdbId,
                       original_title: favorites[activeIndex + 1].title,
                       release_date: favorites[activeIndex + 1].year.toString(),
                       poster_path: favorites[activeIndex + 1].posterURL,
+                      vote_average: favorites[activeIndex + 1].voteAverage,
                     }}
                   />
-                ) : (
-                  <></>
                 )}
-                {favorites[activeIndex + 2] ? (
+                {favorites[activeIndex + 2] && (
                   <MovieCard
                     movie={{
                       id: favorites[activeIndex + 2].tmdbId,
                       original_title: favorites[activeIndex + 2].title,
                       release_date: favorites[activeIndex + 2].year.toString(),
                       poster_path: favorites[activeIndex + 2].posterURL,
+                      vote_average: favorites[activeIndex + 2].voteAverage,
                     }}
                   />
-                ) : (
-                  <></>
                 )}
-                {favorites[activeIndex + 3] ? (
+                {favorites[activeIndex + 3] && (
                   <MovieCard
                     movie={{
                       id: favorites[activeIndex + 3].tmdbId,
                       original_title: favorites[activeIndex + 3].title,
                       release_date: favorites[activeIndex + 3].year.toString(),
                       poster_path: favorites[activeIndex + 3].posterURL,
+                      vote_average: favorites[activeIndex + 3].voteAverage,
                     }}
                   />
-                ) : (
-                  <></>
                 )}
-                {favorites[activeIndex + 4] ? (
+                {favorites[activeIndex + 4] && (
                   <MovieCard
                     movie={{
                       id: favorites[activeIndex + 4].tmdbId,
                       original_title: favorites[activeIndex + 4].title,
                       release_date: favorites[activeIndex + 4].year.toString(),
                       poster_path: favorites[activeIndex + 4].posterURL,
+                      vote_average: favorites[activeIndex + 4].voteAverage,
                     }}
                   />
-                ) : (
-                  <></>
                 )}
               </>
             )}
@@ -243,7 +262,7 @@ const Favorites = () => {
             Select your favorite movies.
           </span>
         )}
-         {deviceWidth <= 600 && activeIndex < favorites.length - 1 && (
+        {deviceWidth <= 600 && activeIndex < favorites.length - 1 && (
           <IoIosArrowForward onClick={handleNext} cursor={"pointer"} />
         )}
         {deviceWidth > 600 &&
