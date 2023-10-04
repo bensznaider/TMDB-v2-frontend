@@ -5,7 +5,8 @@ axios.defaults.withCredentials = true;
 export const getFavorites = (userId) => async () => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_SERVER}/favorites/${userId}/all-favorites`
+      `${import.meta.env.VITE_SERVER}/favorites/${userId}/all-favorites`,
+      { withCredentials: true, credentials: 'include' }
     );
     return response;
   } catch (err) {
@@ -25,7 +26,8 @@ export const addFavorite = (movieData) => async () => {
         year: year,
         posterURL: posterURL,
         voteAverage: voteAverage,
-      }
+      },
+      { withCredentials: true, credentials: 'include' }
     );
     return response;
   } catch (err) {
@@ -38,7 +40,8 @@ export const removeFavorite = (movieData) => async () => {
   try {
     const response = await axios.delete(
       `${import.meta.env.VITE_SERVER}/favorites/remove-favorite`,
-      { data: { userId: userId, tmdbId: tmdbId } }
+      { data: { userId: userId, tmdbId: tmdbId } },
+      { withCredentials: true, credentials: 'include' }
     );
     return response;
   } catch (err) {

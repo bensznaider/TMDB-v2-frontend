@@ -117,9 +117,10 @@ const MovieData = ({ movie, isMenuOpen, posterSize }) => {
               style={{
                 opacity: 0.3,
                 minHeight: "100vh",
+                minWidth: "400px"
               }}
             />
-            <div id="movie-content" className="selected-movie-content">
+            <div className="selected-movie-content">
               <span
                 style={{
                   fontSize: "x-large",

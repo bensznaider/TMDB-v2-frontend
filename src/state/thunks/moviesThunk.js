@@ -6,7 +6,8 @@ axios.defaults.withCredentials = true;
 export const fetchMoviesByString = (movieString, page, newSearch) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_SERVER}/movies/search?movie=${movieString}&page=${page}`
+      `${import.meta.env.VITE_SERVER}/movies/search?movie=${movieString}&page=${page}`,
+      { withCredentials: true, credentials: 'include' }
     );
     if (newSearch) {
       dispatch(setSearchResults(response.data.results))
@@ -23,7 +24,8 @@ export const fetchMoviesByString = (movieString, page, newSearch) => async (disp
 export const fetchNowPlaying = (page) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_SERVER}/movies/now-playing/${page}`
+      `${import.meta.env.VITE_SERVER}/movies/now-playing/${page}`,
+      { withCredentials: true, credentials: 'include' }
     );
     dispatch(setNowPlaying(response.data.results));
   } catch (err) {
@@ -34,7 +36,8 @@ export const fetchNowPlaying = (page) => async (dispatch) => {
 export const fetchTopRated = (page) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_SERVER}/movies/top-rated/${page}`
+      `${import.meta.env.VITE_SERVER}/movies/top-rated/${page}`,
+      { withCredentials: true, credentials: 'include' }
     );
     dispatch(setTopRated(response.data.results));
   } catch (err) {
@@ -45,7 +48,8 @@ export const fetchTopRated = (page) => async (dispatch) => {
 export const fetchMovieDetails = (id) => async () => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_SERVER}/movies/details/${id}`
+      `${import.meta.env.VITE_SERVER}/movies/details/${id}`,
+      { withCredentials: true, credentials: 'include' }
     );
     return response.data;
   } catch (err) {

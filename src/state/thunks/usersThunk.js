@@ -7,7 +7,8 @@ export const createUser = (user) => async () => {
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_SERVER}/users/signup`,
-      user
+      user,
+      { withCredentials: true, credentials: 'include' }
     );
     return response
   } catch (err) {
@@ -19,7 +20,8 @@ export const login = (user) => async () => {
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_SERVER}/users/login`,
-      user
+      user,
+      { withCredentials: true, credentials: 'include' }
     );
     localStorage.setItem("token", JSON.stringify(response.data));
     return response
@@ -34,7 +36,8 @@ export const reloadUser = () => async () => {
     const token = JSON.parse(localStorage.getItem("token"));
     const response = await axios.post(
       `${import.meta.env.VITE_SERVER}/users/me`,
-      token
+      token,
+      { withCredentials: true, credentials: 'include' }
     );
     return response
   }

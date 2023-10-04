@@ -41,7 +41,7 @@ const SelectedMovie = ({ isMenuOpen }) => {
       {deviceWidth <= 850 && movie && (
         <span
           style={{
-            fontSize: "large",
+            fontSize: "23px",
           }}
         >
           <MovieData
@@ -74,12 +74,13 @@ const SelectedMovie = ({ isMenuOpen }) => {
               alt="<Movie poster>"
               style={{
                 minHeight: "100vh",
+                minWidth: "400px",
               }}
             />
           </span>
           <span
             style={{
-              fontSize: "14px",
+              fontSize: `${deviceWidth > 1500 ? "23px" : "17.5px"}`,
             }}
           >
             <MovieData
