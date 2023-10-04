@@ -5,11 +5,12 @@ import LogoutButton from "../../commons/LogoutButton";
 import { login, logout } from "../../state/thunks/usersThunk";
 import { setLoggedUser } from "../../state/slices/userSlice";
 
-const NavbarMenuDesktop = () => {
-
+const NavbarMenuMobile = ({ isOpen }) => {
   const dispatch = useDispatch();
 
   const loggedUser = useSelector((state) => state.loggedUser);
+
+  const [loginForm, setLoginForm] = useState(false);
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -26,6 +27,9 @@ const NavbarMenuDesktop = () => {
     setEmail(event.target.value);
   };
 
+  const handleLoginForm = () => {
+    setLoginForm(true);
+  };
 
   const handleLoginRequest = async (event) => {
     event.preventDefault();
@@ -35,6 +39,7 @@ const NavbarMenuDesktop = () => {
       dispatch(
         setLoggedUser({ userId: response.data.userId, email: user.email })
       );
+      setLoginForm(false);
     } catch (error) {
       console.error("Error during login: ", error);
       setErrorMessage("Incorrect email or password");
@@ -46,42 +51,64 @@ const NavbarMenuDesktop = () => {
 
   const handleLogout = () => {
     dispatch(logout(dispatch));
+    setLoginForm(false);
   };
 
   return (
     <>
-      {loggedUser.userId ? (
+      {isOpen && !loginForm && !loggedUser.userId ? (
         <span className="navbar-menu">
           <span
             style={{
-              margin: "1rem",
+              paddingBottom: "1rem",
+              textAlign: "center",
+              fontSize: "large",
+            }}
+          >
+            Guest
+          </span>
+          <span onClick={handleLoginForm}>
+            <LoginButton loginMenuDisplayed={false} />
+          </span>
+        </span>
+      ) : (
+        <></>
+      )}
+      {isOpen && !loginForm && loggedUser.userId ? (
+        <span className="navbar-menu">
+          <span
+            style={{
+              paddingBottom: "1rem",
+              textAlign: "center",
               fontSize: "large",
             }}
           >
             {loggedUser.email}
           </span>
-          <span onClick={handleLogout} style={{margin: "1rem"}}>
+          <span onClick={handleLogout}>
             <LogoutButton />
           </span>
         </span>
       ) : (
+        <></>
+      )}
+      {isOpen && loginForm && !loggedUser.userId ? (
         <span className="navbar-menu" style={{ textAlign: "center" }}>
           <span
             style={{
               fontSize: "large",
-              margin: "1rem",
             }}
           >
             Guest
           </span>
-          <form onSubmit={handleLoginRequest} style={{display: "flex", flexDirection: "row"}}>
+          <form onSubmit={handleLoginRequest}>
             <input
               className="welcome-search"
               type="email"
               value={email}
               onChange={handleOnChangeEmail}
-              placeholder="EMAIL"
-              style={{ margin: "1rem", width: "10rem" }}
+              placeholder="EMAIL: example@example.com"
+              style={{ margin: "1.5rem" }}
             />
             <input
               className="welcome-search"
@@ -89,11 +116,9 @@ const NavbarMenuDesktop = () => {
               value={password}
               onChange={handleOnChangePassword}
               placeholder="PASSWORD"
-              style={{ margin: "1rem", width: "8rem" }}
+              style={{ marginBottom: "1.5rem" }}
             />
-            <span style={{margin: "1rem"}}>
             <LoginButton loginMenuDisplayed={true} />
-            </span>
           </form>
           {errorMessage ? (
             <div style={{ margin: "1rem", fontSize: "large" }}>
@@ -103,9 +128,11 @@ const NavbarMenuDesktop = () => {
             <></>
           )}
         </span>
+      ) : (
+        <></>
       )}
     </>
   );
 };
 
-export default NavbarMenuDesktop;
+export default NavbarMenuMobile;

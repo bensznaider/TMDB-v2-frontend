@@ -1,22 +1,21 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { Spin as Hamburger } from "hamburger-react";
 import NavbarMenuDesktop from "./Desktop/NavbarMenu";
-import LoginButton from "../commons/LoginButton";
+import NavbarMenuMobile from "./Mobile/NavbarMenu";
 
-const Navbar = () => {
-  const isMobileDevice = useSelector((state) => state.isMobile);
+const Navbar = ({ toggleMenu }) => {
+  const deviceWidth = window.innerWidth;
   const [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogoClick = () => {
-    navigate("/");
+  const handleMenuClick = () => {
+    setOpen(!isOpen);
+    toggleMenu();
   };
 
-  const handleLoginClick = () => {
-    navigate("/login");
-    setOpen(false);
+  const handleLogoClick = () => {
+    navigate("/");
   };
 
   return (
@@ -25,31 +24,16 @@ const Navbar = () => {
         <h1 id="logo" onClick={handleLogoClick}>
           TMDB
         </h1>
-        {isMobileDevice ? (
-          <Hamburger toggled={isOpen} toggle={setOpen} />
+        {deviceWidth <= 850 ? (
+          <>
+            <Hamburger toggled={isOpen} toggle={handleMenuClick} />
+            <NavbarMenuMobile isOpen={isOpen} />
+          </>
         ) : (
-          <NavbarMenuDesktop />
+          <></>
         )}
+        {deviceWidth > 850 ? <NavbarMenuDesktop /> : <></>}
       </div>
-      {isMobileDevice && isOpen ? (
-        <span className="navbar navbar-menu">
-          <span
-            style={{
-              padding: "1rem",
-              marginBottom: "0.2rem",
-              textAlign: "center",
-              fontSize: "large",
-            }}
-          >
-            Guest
-          </span>
-          <span onClick={handleLoginClick}>
-            <LoginButton />
-          </span>
-        </span>
-      ) : (
-        <></>
-      )}
     </>
   );
 };
