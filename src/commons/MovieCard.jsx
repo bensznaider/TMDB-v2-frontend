@@ -23,11 +23,11 @@ const MovieCard = ({ movie }) => {
               className="movie-card-background"
               style={{
                 height: "11rem",
-                width: "6rem",
+                width: "6.4rem",
                 marginBottom: "1rem",
                 marginTop: "1rem",
-                marginRight: "2.5rem",
-                marginLeft: "2.5rem",
+                marginRight: "1.2rem",
+                marginLeft: "1.3rem",
                 borderStyle: "solid",
                 borderWidth: "2px",
                 borderColor: "#272932",
